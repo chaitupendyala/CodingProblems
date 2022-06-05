@@ -1,0 +1,44 @@
+'''
+Count Unique Characters of All Substrings of a Given String
+
+Input: s = "ABC"
+Output: 10
+Explanation: All possible substrings are: "A","B","C","AB","BC" and "ABC".
+Every substring is composed with only unique letters.
+Sum of lengths of all substring is 1 + 1 + 1 + 2 + 2 + 3 = 10
+
+Input: s = "ABA"
+Output: 8
+Explanation: The same as example 1, except countUniqueChars("ABA") = 1.
+
+Input: s = "LEETCODE"
+Output: 92
+'''
+from itertools import permutations
+from collections import Counter
+
+class Solution:
+	def countUniqueChars(self, s: str) -> int:
+		counters = Counter(s)
+		uniqueChars = 0
+		for v in counters.values():
+			if v == 1:
+				uniqueChars += 1
+		return uniqueChars
+
+	def uniqueLetterString(self, s: str) -> int:
+		uniqueLetterStrings = 0
+		#Remove repeating charecters before processing
+		#processed_string = "".join(set(s))
+		#str_length = len(processed_string)
+		str_length = len(s)
+		for i in range(str_length):
+			for j in range(i+1, str_length+1):
+				uniqueLetterStrings += self.countUniqueChars(s[i:j])
+		return uniqueLetterStrings
+
+s = Solution()
+print("ABC", s.uniqueLetterString("ABC"))
+print("ABA", s.uniqueLetterString("ABA"))
+print("LEETCODE", s.uniqueLetterString("LEETCODE"))
+#print("Large String1", s.uniqueLetterString("DELQGVWNZKIJJPSXOVWWIZUXCEGWSQLESNSRBMKZARFPAXSVWQEZDENDAHNNIBHGHTFDLPGDLFXMIYRFNLMXHNPIFUAXINXPXLCTTJNLGGMKJIOEWBECNOFQPVCIKIAZMNGHEHFMCPWSMJTMGVSXTOGCGUYKFMNCGLCBRAFJLJVPIVDOLJBURULPGXBVDCEWXXXLTRMSHPKSPFDGNVOCZWDXJUWVNAREDOKTZMIUDKDQWWWSAEUUDBHMWZELOSBIHMAYJEMGZPMDOOGSCKLVHTGMETHUISCLJKDOQEWGVBULEMUXGTRKGXYFDIZTZWMLOFTCANBGUARNWQEQWGMIKMORVQUZANJNRNPMJWYLVHWKDFLDDBBMILAKGFROEQAMEVONUVHOHGPKLBPNYZFPLXNBCIFENCGIMIDCXIIQJWPVVCOCJTSKSHVMQJNLHSQTEZQTTMOXUSKBMUJEJDBJQNXECJGSZUDENJCPTTSREKHPRIISXMWBUGMTOVOTRKQCFSDOTEFPSVQINYLHXYVZTVAMWGPNKIDLOPGAMWSKDXEPLPPTKUHEKBQAWEBMORRZHBLOGIYLTPMUVBPGOOOIEBJEGTKQKOUURHSEJCMWMGHXYIAOGKJXFAMRLGTPNSLERNOHSDFSSFASUJTFHBDMGBQOKZRBRAZEQQVWFRNUNHBGKRFNBETEDJIWCTUBJDPFRRVNZENGRANELPHSDJLKVHWXAXUTMPWHUQPLTLYQAATEFXHZARFAUDLIUDEHEGGNIYICVARQNRJJKQSLXKZZTFPVJMOXADCIGKUXCVMLPFJGVXMMBEKQXFNXNUWOHCSZSEZWZHDCXPGLROYPMUOBDFLQMTTERGSSGVGOURDWDSEXONCKWHDUOVDHDESNINELLCTURJHGCJWVIPNSISHRWTFSFNRAHJAJNNXKKEMESDWGIYIQQRLUUADAXOUEYURQRVZBCSHXXFLYWFHDZKPHAGYOCTYGZNPALAUZSTOU"))
