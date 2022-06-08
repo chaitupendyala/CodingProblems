@@ -23,6 +23,14 @@ Output: [0,1]
 '''
 class Solution:
 	def twoSum(self, nums: list[int], target: int) -> list[int]:
-		OPT = [[0 for _ in range(nums)] for _ in range(nums)]
+		differences = {}
+		for index, number in enumerate(nums):
+			difference = target - number
+			print(difference)
+			if difference in differences:
+				return [differences[difference], index]
+			else:
+				differences[number] = index
+		
 
 print( "nums = [2,7,11,15], target = 9: ", Solution().twoSum([2,7,11,15], 9) )
