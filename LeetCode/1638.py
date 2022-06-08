@@ -9,26 +9,31 @@ Return the number of substrings that satisfy the condition above.
 
 A substring is a contiguous sequence of characters within a string.
 
- 
-
 Example 1:
-
 Input: s = "aba", t = "baba"
 Output: 6
 Explanation: The following are the pairs of substrings from s and t that differ by exactly 1 character:
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
+("'a'ba", "'b'aba")
+("'a'ba", "ba'b'a")
+("ab'a'", "'b'aba")
+("ab'a'", "ba'b'a")
+("a'b'a", "b'a'ba")
+("a'b'a", "bab'a'")
 The underlined portions are the substrings that are chosen from s and t.
-​​Example 2:
+
+Example 2:
 Input: s = "ab", t = "bb"
 Output: 3
 Explanation: The following are the pairs of substrings from s and t that differ by 1 character:
-("ab", "bb")
-("ab", "bb")
-("ab", "bb")
-​​​​The underlined portions are the substrings that are chosen from s and t.
+("'a'b", "'b'b")
+("'a'b", "'b'b")
+("'ab'", "'bb'")
+The underlined portions are the substrings that are chosen from s and t.
 '''
+class Solution:
+	def countSubstrings(self, s: str, t: str) -> int:
+		pass
+
+
+
+
