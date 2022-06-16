@@ -19,24 +19,32 @@ Example 3:
 Input: nums = [0]
 Output: []
 '''
+
+'''
+a+b=-c, 3SUM can be reduced to a 2SUM problem
+'''
 class Solution:
 	def threeSum(self, nums: list[int]) -> list[list[int]]:
-		differences = {}
-		return_list = []
-		for i in range(len(nums)):
-			differences = dict()
-			difference = 0 - (nums[i])
-			sum3 = list()
-			for j in range(len(nums)):
-				if i == j:
-					pass
-				diff = difference - nums[j]
-				if diff in differences:
-					sum3 = [nums[i], nums[j], differences[diff]]
-					return_list.append(sum3)
+		nums.sort()
+		n, results = len(nums), []
+
+		for index in range(n):
+			if index > 0 and nums[index] == nums[index-1]:
+				continue
+			target = 0 - nums[index]
+			start,end = index+1, n-1
+
+			while start<end:
+				if nums[start] + nums[end] == target:
+					results.append([nums[index], nums[start], nums[end]])
+					start += 1
+					while start<end and nums[start] == nums[start-1]:
+						start+=1
+				elif nums[start] + nums[end] < target:
+					start+=1
 				else:
-					differences[diff] = nums[j]
-		return return_list
+					end-=1
+		return results
 
 print("nums = [-1,0,1,2,-1,-4]: ", Solution().threeSum([-1,0,1,2,-1,-4]))
 print("nums = []: ", Solution().threeSum([]))
