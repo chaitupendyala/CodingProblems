@@ -27,7 +27,7 @@ class Solution:
 		found_target = False
 		start = 0; end = len(nums) - 1
 		while ( start <= end and not found_target ):
-			middle = start + (end - start)//2
+			middle = (start + end)//2
 			if ( target == nums[middle] ):
 				found_target = True
 				index_of_target = middle
