@@ -17,13 +17,12 @@ class Solution:
 		rows = set()
 		columns = set()
 		num_of_rows = len(matrix)
-		num_of_columns = 0
+		num_of_columns = len(matrix[0])
 		for i,row in enumerate(matrix):
 			for j,n in enumerate(row):
 				if (n == 0):
 					rows.add(i)
 					columns.add(j)
-				num_of_columns = max(num_of_columns, j+1)
 
 		for i in range(num_of_rows):
 			if i in rows:
