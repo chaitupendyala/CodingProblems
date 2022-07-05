@@ -28,20 +28,37 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
 '''
 class Solution:
 	def minWindow(self, s: str, t: str) -> str:
+		if len(t) > len(s):
+			return ""
 		letter_occurances = dict()
 		for index, charecter in enumerate(s):
 			if ( charecter not in letter_occurances ):
 				letter_occurances[charecter] = set()
 			letter_occurances[charecter].add(index)
 		start, end = len(s), 0
+		max_list = list()
 		for char in t:
 			if char not in letter_occurances:
 				return ""
 			occurances = list(letter_occurances[char])
-			start = min(start, occurances[0])
-			end = max(end, occurances[-1])
-		return s[start:end]
+			max_index = max(occurances)
+			max_list.append(max_index)
+			letter_occurances[char].remove(max_index)
+		return s[min(max_list):max(max_list)+1]
 
 print("s = \"ADOBECODEBANC\", t = \"ABC\": ", Solution().minWindow("ADOBECODEBANC", "ABC"))
 print("s = \"a\", t = \"a\": ", Solution().minWindow("a", "a"))
 print("s = \"a\", t = \"aa\": ", Solution().minWindow("a", "aa"))
+print("s = \"aa\", t = \"aa\": ", Solution().minWindow("aa", "aa"))
+print("s = \"cabwefgewcwaefgcf\", t = \"cae\": ", Solution().minWindow("cabwefgewcwaefgcf", "cae"))
+'''
+Input
+"cabwefgewcwaefgcf"
+"cae"
+
+Output
+"aefgc"
+
+Expected
+"cwae"
+'''
