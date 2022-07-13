@@ -1,0 +1,13 @@
+7 Steps to solve a DP problem:
+==============================
+1. How to recognize a DP problem
+2. Identify the problem variable
+3. Clearly express the recurrence relation
+4. Identify the base cases
+5. Decide if you want to implement it iteratively or recursively
+6. Add memoization
+7. Determine time complexity
+
+Step 1: How to recognize a Dynamic Programming problem
+======================================================
+-> What you want to ask yourself is whether your problem solution can be expressed as a function of solutions to similar smaller problems.
