@@ -29,7 +29,11 @@ The input must be a binary string of length 32
 '''
 class Solution:
     def reverseBits(self, n: int) -> int:
-        print(str(n))
+        ans = 0
+        for _ in range(32):
+            ans = ( ans << 1 ) + ( n & 1 )
+            n >>= 1
+        return ans
 
-print("n = 00000010100101000001111010011100:", Solution().reverseBits(n = 00000010100101000001111010011100))
+#print("n = 00000010100101000001111010011100:", Solution().reverseBits(n = 00000010100101000001111010011100))
 print("n = 11111111111111111111111111111101:", Solution().reverseBits(n = 11111111111111111111111111111101))
