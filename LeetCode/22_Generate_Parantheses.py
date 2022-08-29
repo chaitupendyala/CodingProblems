@@ -14,13 +14,14 @@ Output: ["()"]
 class Solution:
 	def generate( self, p, left, right, parentheses=[] ):
 		if left:
-			self.generate( p + '(', left - 1, right     )
+			self.generate( p + '(', left - 1, right, parentheses )
 		if right > left:
-			self.generate( p + ')', left    , right - 1 )
+			self.generate( p + ')', left    , right - 1, parentheses )
 		if not right:
 			parentheses.append(p)
 		return parentheses
 	def generateParenthesis(self, n: int) -> list[str]:
-		return self.generate( '', n, n )
+		return self.generate( '', n, n, [] )
 
 print(Solution().generateParenthesis(3))
+print(Solution().generateParenthesis(1))
