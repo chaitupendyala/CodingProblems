@@ -21,21 +21,17 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
 '''
 class Solution:
-	MEM = list()
-	def _climbStairs(self, n: int) -> int:
-		if ( n == 0 ):
-			return 0
-		if ( n == 1 ):
-			return 1
-		if ( n == 2 ):
-			return 2
-		if ( self.MEM[n-1] != -1  ):
-			return self.MEM[n-1]
-		self.MEM[n-1] = self._climbStairs(n-1) + self._climbStairs(n-2)
-		return self.MEM[n-1]
-	def climbStairs(self, n: int) -> int:
-		self.MEM = [-1 for _ in range(n)]
-		return self._climbStairs(n)
+    def climbStairs(self, n: int) -> int:
+        if n <= 0:
+            return 0
+        if n <= 2:
+            return n
+        n0,n1 = 1,2
+        i=3
+        while (i<n+1):
+            n0, n1 = n1, n0+n1
+            i+=1
+        return n1
 
 print("n = 2: ", Solution().climbStairs(2))
 print("n = 3: ", Solution().climbStairs(3))
