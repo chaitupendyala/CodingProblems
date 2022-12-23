@@ -19,6 +19,12 @@ Explanation:
 rotate 1 steps to the right: [99,-1,-100,3]
 rotate 2 steps to the right: [3,99,-1,-100]
 '''
+'''
+Approach I followed:
+1. Reverse the last k
+2. Reverse the other at the first
+3. Reverse the entire array
+'''
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
         len_of_nums = len(nums)
