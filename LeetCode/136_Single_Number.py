@@ -17,6 +17,15 @@ Example 3:
 Input: nums = [1]
 Output: 1
 '''
+'''
+Approach: a XOR 0 = a
+          a XOR a = 0
+          a XOR b XOR a = (a XOR a) XOR b = b
+          Therefore if we XOR all the numbers we will get the number that is occuring only once
+'''
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
-        return (2 * sum(set(nums))) - sum(nums)
+        a = 0
+        for i in nums:
+            a ^= i
+        return a
