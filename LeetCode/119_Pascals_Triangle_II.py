@@ -25,12 +25,7 @@ Follow up: Could you optimize your algorithm to use only O(rowIndex) extra space
 # The nth row of the Pascal's triangle follows the nCr approach
 # [ nC1, nC2, ... , nCr-1, nCr ]
 # NCr = (NCr - 1 * (N - r + 1)) / r
+from math import comb
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
-        nthRowPascals = [1]
-        previous = 1
-        for i in range(1, rowIndex+1):
-            current = (previous * (rowIndex - i + 1)) // i
-            nthRowPascals.append(current)
-            previous = current
-        return nthRowPascals
+        return [comb(rowIndex, i) for i in range(rowIndex+1)]
