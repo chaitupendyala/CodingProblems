@@ -18,13 +18,24 @@ n == matrix.length == matrix[i].length
 1 <= n <= 20
 -1000 <= matrix[i][j] <= 1000
 '''
+'''
+More elegant approach:
+1. Transpose
+2. Reverse
+'''
 class Solution:
-    def rotate(self, matrix: List[List[int]]) -> None:
+    def transpose(self, matrix: List[List[int]]) -> None:
         n = len(matrix[0])
-        for i in range( n // 2 + n % 2 ):
-            for j in range( n // 2 ):
-                temp = matrix[n-1-j][i]
-                matrix[n-1-j][i] = matrix[n-1-i][n-1-j]
-                matrix[n-1-i][n-1-j] = matrix[j][n-1-i]
-                matrix[j][n-1-i] = matrix[i][j]
-                matrix[i][j] = temp
+        for i in range(n):
+            for j in range(i+1,n):
+                matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+    
+    def reverse(self, matrix: List[List[int]]) -> None:
+        n = len(matrix[0])
+        for i in range(n):
+            for j in range(n//2):
+                matrix[i][j],matrix[i][-1-j] = matrix[i][-1-j],matrix[i][j]
+    
+    def rotate(self, matrix: List[List[int]]) -> None:
+        self.transpose(matrix)
+        self.reverse(matrix)
