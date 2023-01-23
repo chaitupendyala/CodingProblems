@@ -17,4 +17,29 @@ Constraints:
 '''
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
-        pass
+        matrix = [[0 for _ in range(n)] for _ in range(n)]
+        left, top = 0, 0
+        right, bottom = n-1, n-1
+        counter = 0
+        while counter < n ** 2:
+            for i in range(left, right+1):
+                counter+=1
+                matrix[top][i] = counter
+            
+            for j in range(top+1, bottom+1):
+                counter+=1
+                matrix[j][right] = counter
+            
+            if top != bottom:
+                for i in range(right-1, left-1, -1):
+                    counter+=1
+                    matrix[bottom][i] = counter
+            if right != left:
+                for j in range(bottom-1, top, -1):
+                    counter+=1
+                    matrix[j][left] = counter
+            top+=1
+            left+=1
+            right-=1
+            bottom-=1
+        return matrix
