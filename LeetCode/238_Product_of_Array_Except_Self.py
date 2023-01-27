@@ -28,31 +28,19 @@ Follow up: Can you solve the problem in O(1) extra space complexity?
 '''
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
-        product = 0
-        zero_exists, two_or_more_zero_exist = False, False
-        for i in nums:
-            if i != 0:
-                if product == 0: product = 1
-                product *= i
-            else:
-                if zero_exists:
-                    two_or_more_zero_exist = True
-                zero_exists = True
-        output = []
-        for i in range(len(nums)):
-            if nums[i] != 0 and zero_exists:
-                output.append(0)
-                continue
-            if nums[i] != 0 and not zero_exists:
-                output.append(product // nums[i])
-                continue
-            
-            if nums[i] == 0:
-                if two_or_more_zero_exist:
-                    output.append(0)
-                else:
-                    output.append(product)
-        return output
+        length = len(nums)
+        ans = [0]*length
+
+        ans[0] = 1
+        for i in range(1, length):
+            ans[i] = nums[i-1] * ans[i-1]
+        
+        R = 1
+        for i in range(length - 1, -1, -1):
+            ans[i] = ans[i] * R
+            R *= nums[i]
+        
+        return ans
 
 print("nums = [1,2,3,4]:", Solution().productExceptSelf(nums = [1,2,3,4]))
 print("nums = [-1,1,0,-3,3]:", Solution().productExceptSelf(nums = [-1,1,0,-3,3]))
