@@ -1,19 +1,15 @@
-from bisect import bisect_left
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        def binarySearch(row, target):
-            i = bisect_left(row, target)
-            if i != len(row) and row[i] == target:
+        m, n = len(matrix), len(matrix[0])
+        mid, midElement = 0, 0
+        left, right = 0, m*n-1
+        while left<=right:
+            mid = (left+right) // 2
+            midElement = matrix[mid//n][mid%n]
+            if midElement == target:
                 return True
-            return False
-        
-        minRow, maxRow = 0, len(matrix)-1
-        while minRow<=maxRow:
-            midRow = (minRow + maxRow) // 2
-            if matrix[midRow][0] <= target and matrix[midRow][-1] >= target:
-                return binarySearch(matrix[midRow], target)
-            elif matrix[midRow][-1] < target:
-                minRow = midRow + 1
+            elif midElement < target:
+                left = mid + 1
             else:
-                maxRow = midRow - 1
-        return False
+                right = mid - 1
+        return False 
