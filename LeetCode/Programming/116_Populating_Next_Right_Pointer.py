@@ -1,26 +1,30 @@
-from collections import deque
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         if not root:
-            return None
-        queue1, queue2 = [], []
-        queue1.append(root)
-        queue2.append(root.left)
-        queue2.append(root.right)
-        while len(queue1) != 0 or len(queue2) != 0:
-            for i in range(len(queue1)-1):
-                if queue1[i] and queue1[i].left:
-                    queue2.append(queue1[i].left)
-                if queue1[i] and queue1[i].right:
-                    queue2.append(queue1[i].right)
-                if queue1[i]:
-                    queue1[i].next = queue1[i+1]
-            if len(queue1) > 1:
-                if queue1[-1] and queue1[-1].left:
-                    queue2.append(queue1[-1].left)
-                if queue1[-1] and queue1[-1].right:
-                    queue2.append(queue1[-1].right)
-            queue1 = queue2
-            queue2 = []
+            return root
+        
+        #Goto the leftmost node first
+        leftmost = root
+        while leftmost.left:
+            head = leftmost
+            while head:
+                #The left node's next node will be the right node
+                head.left.next = head.right
+                if head.next:
+                    #The right node's next will be parent's next's left node
+                    head.right.next = head.next.left
+                #Move to the next node
+                head = head.next
+            
+            leftmost = leftmost.left
         return root
