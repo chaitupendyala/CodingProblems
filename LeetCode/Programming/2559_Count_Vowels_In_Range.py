@@ -1,5 +1,5 @@
 class Solution:
-    def vowelStrings(self, words: List[str], queries: List[List[int]]) -> List[int]:
+    def vowelStrings(self, words: list[str], queries: list[list[int]]) -> list[int]:
         def startEndVowel(s):
             if len(s) == 0:
                 return False
@@ -18,4 +18,4 @@ class Solution:
         result = []
         for query in queries:
             result.append(number_of_start[query[1]+1] - number_of_start[query[0]])
-        return result
+        return result 
